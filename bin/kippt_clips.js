@@ -2,7 +2,7 @@
 /*global require:false, process:false, console:false, __dirname:false, exports:false */
 (function () {
     "use strict";
-    var nodeKippt = require('node-kippt'),
+    var nodeKippt = require('../custom_modules/node-kippt'),
         Config = require('../bin/app_config');
 
 
@@ -30,16 +30,17 @@
 
         function getSinceDate(days) {
             var now = new Date(0);
-            return new Date().setDate(now.getDate()-(days || 7)).toString();
+            return new Date().setDate(now.getDate()-(days || 7)) / 1000;
         }
 
         function getClips(callback) {
             var api = authenticateWithService(),
                 date = getSinceDate(7);
             api.clips.all({
-                since: '1372857511'
+                since: date || '1372857511'
                 }, function(error, data) {
                   if(!error) {
+                    console.log('Retrieved ' + data.meta.limit + ' clips');
                     if(callback) {
                         callback(data);
                     }

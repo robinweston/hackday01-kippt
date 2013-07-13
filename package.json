@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "~3.3.4",
-    "node-kippt": "0.0.4",
     "mailparser": "0.3.4",
     "simplesmtp": "0.2.4",
     "nodemailer": "*",

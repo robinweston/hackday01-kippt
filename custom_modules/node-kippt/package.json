@@ -1,0 +1,42 @@
+{
+  "name": "node-kippt",
+  "description": "A wrapper for the kippt.com API",
+  "keywords": [
+    "kippt",
+    "api"
+  ],
+  "version": "0.0.4",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/enotionz/node-kippt.git"
+  },
+  "author": {
+    "name": "Dominick Pham",
+    "email": "dominick@dph.am",
+    "url": "http://dph.am"
+  },
+  "main": "./lib/kippt.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "devDependencies": {
+    "mocha": "1.0.x"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">= 0.4.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/enotionz/node-kippt/raw/master/LICENSE"
+    }
+  ],
+  "readme": "# node-kippt\n\nA wrapper for the [Kippt](http://kippt.com) API.\n\n## Installation\nYou can install using Node Package Manager (npm)\n```\nnpm install node-kippt\n```\nOr define in your `package.json` dependencies\n\n\n## Usage\n\nRefer to the [Kippt developer API page](https://kippt.com/developers/) for information about the API response.\n\n### Initialize\n``` js\nvar Kippt = require('node-kippt');\n\n// Initialize the KipptAPI\n// You can easily obtain the API token by running\n//   curl --user name:password https://kippt.com/api/account/\nvar kippt = new Kippt.KipptAPI({\n  username: 'YOUR_USERNAME',\n  api_token: 'API_TOKEN'\n});\n```\n\n### Clips API\n``` js\n// Returns the full clips listing\nkippt.clips.all(function(error, data) {\n  if(!error) console.log(data);\n});\n\n// Returns the clip information associated with a clip ID\nkippt.clips.getById(CLIP_ID, function(error, data) {\n  if(!error) console.log(data);\n});\n\n// add to the clips list\nkippt.clips.add({\n  url: \"Clip's url\",    // required\n  title: \"Clip's title\",\n  list: \"resource_uri for clip's list\",\n  notes: \"Notes for the clip\",\n  is_starred: Boolean,\n  is_read_later: Boolean\n}, function(error, data) {\n  if(!error) console.log(data);\n});\n\n// update the clip, refer to above options\nkippt.clips.update({\n  id: CLIP_ID, // require\n  other_options: '' // refer to above options\n}, function(error, data) {\n  if(!error) console.log(data);\n});\n\n// remove the clip\nkippt.clips.remove(CLIP_ID, function(error, data) {\n  if(!error) console.log('SUCCESS');\n});\n\n// search clips\nkippt.clips.search({\n  q: 'search_query',\n  is_starred: Boolean\n}, function(error, data) {\n  if(!error) console.log(data);\n});\n```\n\n### Lists API\n``` js\n// Returns the full lists object\nkippt.lists.all(function(error, data) {\n  if(!error) console.log(data);\n});\n\n// Returns the list information associated with a list ID\nkippt.lists.getById(LIST_ID, function(error, data) {\n  if(!error) console.log(data);\n});\n\n// add to the list\nkippt.lists.add({\n  title: \"list title\", // required\n  is_private: Boolean\n}, function(error, data) {\n  if(!error) console.log(data);\n});\n\n// update the list\nkippt.lists.update({\n  id: LIST_ID, // require\n  title: \"list title\",\n  is_private: Boolean\n}, function(error, data) {\n  if(!error) console.log(data);\n});\n\n// remove an item from the list\nkippt.clips.remove(LIST_ID, function(error, data) {\n  if(!error) console.log('SUCCESS');\n});\n```\n",
+  "_id": "node-kippt@0.0.4",
+  "dist": {
+    "shasum": "b51cdf514939be4867b569c586cd2afae3e1c1a2"
+  },
+  "_from": "node-kippt@0.0.4"
+}
