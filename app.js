@@ -23,17 +23,28 @@
 		// ROUTES OBJECTS
         sendemail = require('./routes/sendemail'),
 		
-        html = emailTemplates.templates.compileTemplate();
-
-		// Testing templates
-		console.log(html);
-        
+		mapAndFilter = require('./bin/map_and_filter');
+		
 		configureExpress();
 	
 		var schedulerFired = function(){
-			console.log("scheduler fired");
-			var clips =  new Kippt.KipptClips().getClips();
-		}
+			console.log("scheduler fired");			
+			new Kippt.KipptClips().getClips(clipsRetrieved);						
+		};
+		
+		var clipsRetrieved = function(clips) {
+			console.log('clips retrieved');
+			
+			var mappedClips = mapAndFilter(clips);
+			
+			console.log('filtered clips');
+			
+			var html = emailTemplates.templates.compileTemplate(mappedClips);
+			
+			console.log('created html');
+			
+			console.log(html);
+		};			
 		
 		startup.start(process.argv, schedulerFired);
 	
